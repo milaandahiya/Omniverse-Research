@@ -1,20 +1,30 @@
 #Custom Scripts/testingScript
 import omni
-import numpy as np
-import os
-import json
-from PIL import Image
+from omni.isaac.core import World
 import omni.replicator.core as rep
 
 
+world = World()
 context = omni.usd.get_context()
 # stage = context.get_stage() # Get the current stage in Omniverse
 context.open_stage('/home/gjfh119/Documents/USD Files/alien.usd') # Open saved dancing alien stage
 print("Opened Stage")
 
 # Create cameras (corners of room are -10 to 10 on the x and -5 to 5 on the y/z)
-camera1 = rep.create.camera(position=(-990, 0, 250), rotation=(0, 0, -180), focal_length=20.0, focus_distance=1000, f_stop=2.0)
-camera2 = rep.create.camera(position=(990, 0, 250), rotation=(0, 0, 0), focal_length=20.0, focus_distance=1000, f_stop=2.0)
+camera1 = rep.create.camera(position=(-990, 0, 250),
+                            rotation=(0, 0, -180),
+                            focal_length=20.0,
+                            focus_distance=1000,
+                            f_stop=2.0,
+                            clipping_range=(0.1, 10000))
+
+camera2 = rep.create.camera(position=(990, 0, 250),
+                            rotation=(0, 0, 0),
+                            focal_length=20.0,
+                            focus_distance=1000,
+                            f_stop=2.0,
+                            clipping_range=(0.1, 10000))
+
 # ...
 print("Created Cameras")
 
