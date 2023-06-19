@@ -1,7 +1,4 @@
 #Custom Scripts/testingScript
-# from omni.isaac.kit import SimulationApp
-# simulation_app = SimulationApp(launch_config={"renderer": "RayTracedLighting", "headless": False})
-
 import omni
 import numpy as np
 import os
@@ -12,7 +9,7 @@ import omni.replicator.core as rep
 
 context = omni.usd.get_context()
 # stage = context.get_stage() # Get the current stage in Omniverse
-context.open_stage('/home/gjfh119/Documents/USD Files/alien.usd') # Open saved dancing alien stage
+# context.open_stage('/home/gjfh119/Documents/USD Files/alien.usd') # Open saved dancing alien stage
 print("Opened Stage")
 
 with rep.new_layer():
@@ -20,7 +17,7 @@ with rep.new_layer():
     camera1 = rep.create.camera(position=(-99, 0, 250), rotation=(90, 0, -90), focal_length=20.0, focus_distance=1000, f_stop=2.0)
     camera2 = rep.create.camera(position=(99, 0, 250), rotation=(90, 0, 90), focal_length=20.0, focus_distance=1000, f_stop=2.0)
     # ...
-    print("Created Cameras")
+print("Created Cameras")
 
 # Render frames at 720p
 render_product1 = rep.create.render_product(camera1, (1280, 720))
