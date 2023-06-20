@@ -1,3 +1,3 @@
 from generateRGBD import generateRGBD
 
-generateRGBD(display=True)
+generateRGBD(image="0030", display=True)

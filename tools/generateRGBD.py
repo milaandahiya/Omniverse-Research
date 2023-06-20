@@ -2,12 +2,12 @@ import open3d as o3d
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generateRGBD(display: bool):
+def generateRGBD(image: str = "0000", display: bool = False):
     # Get color image
-    color_img = o3d.io.read_image("/home/gjfh119/Documents/DataOut/RenderProduct_Replicator/rgb/rgb_0000.png")
+    color_img = o3d.io.read_image(f"/home/gjfh119/Documents/DataOut/RenderProduct_Replicator/rgb/rgb_{image}.png")
 
     # Load numpy array with depth values and convert to depth image
-    depth_array = np.load("/home/gjfh119/Documents/DataOut/RenderProduct_Replicator/distance_to_camera/distance_to_camera_0000.npy")
+    depth_array = np.load(f"/home/gjfh119/Documents/DataOut/RenderProduct_Replicator/distance_to_camera/distance_to_camera_{image}.npy")
     print(depth_array.shape)
     depth_img = o3d.geometry.Image(depth_array)
 
@@ -19,6 +19,7 @@ def generateRGBD(display: bool):
         f, plot = plt.subplots(1,2)
         plot[0].imshow(rgbd_img.color)
         plot[1].imshow(rgbd_img.depth)
+        f.set_figwidth(12)
         plt.show()
 
     return rgbd_img
