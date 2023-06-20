@@ -15,7 +15,7 @@ depth_img = o3d.geometry.Image(depth_array)
 rgbd_img = o3d.geometry.RGBDImage.create_from_color_and_depth(color_img, depth_img, convert_rgb_to_intensity=False)
 
 # Display RGBD image components
-f, axarr = plt.subplots(1,2)
-axarr[0].imshow(rgbd_img.color)
-axarr[1].imshow(rgbd_img.depth)
+f, plot = plt.subplots(1,2)
+plot[0].imshow(rgbd_img.color)
+plot[1].imshow(rgbd_img.depth)
 plt.show()
