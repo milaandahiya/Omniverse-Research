@@ -12,7 +12,7 @@ def generateRGBD(image: str = "0000", display: bool = False):
     depth_img = o3d.geometry.Image(depth_array)
 
     #Create RGBD image from color and depth images
-    rgbd_img = o3d.geometry.RGBDImage.create_from_color_and_depth(color_img, depth_img, convert_rgb_to_intensity=False)
+    rgbd_img = o3d.geometry.RGBDImage.create_from_color_and_depth(color_img, depth_img, depth_scale=20, depth_trunc=1, convert_rgb_to_intensity=False)
 
     # Display RGBD image components
     if display:
