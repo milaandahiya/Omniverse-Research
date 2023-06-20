@@ -14,14 +14,14 @@ camera1 = rep.create.camera(position=(-990, 0, 250),
                             focal_length=20.0,
                             focus_distance=1000,
                             f_stop=2.0,
-                            clipping_range=(0, 2000))
+                            clipping_range=(0.1, 2000))
 
 camera2 = rep.create.camera(position=(990, 0, 250),
                             rotation=(0, 0, 0),
                             focal_length=20.0,
                             focus_distance=1000,
                             f_stop=2.0,
-                            clipping_range=(0, 2000))
+                            clipping_range=(0.1, 2000))
 
 # ...
 print("Created Cameras")
