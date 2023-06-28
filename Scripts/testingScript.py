@@ -10,14 +10,14 @@ print("Retrieved Stage")
 
 # Create cameras (corners of room are -10 to 10 on the x and -5 to 5 on the y/z -- camera units are 10x world units)
 camera1 = rep.create.camera(position=(-990, 0, 250),
-                            rotation=(0, 0, -180),
+                            rotation=(0, 0, 180),
                             focal_length=20.0,
                             focus_distance=1000,
                             f_stop=1.8,
                             clipping_range=(0.1, 1800))
 
-camera2 = rep.create.camera(position=(990, 0, 250),
-                            rotation=(0, 0, 0),
+camera2 = rep.create.camera(position=(-990, -490, 250),
+                            rotation=(0, 0, 217),
                             focal_length=20.0,
                             focus_distance=1000,
                             f_stop=1.8,
