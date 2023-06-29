@@ -1,7 +1,5 @@
 import open3d as o3d
-from PIL import Image
 from generateRGBD import generateRGBD
-import numpy as np
 
 # Get the RGBD image generated from Omniverse data
 displayAll = False
@@ -24,7 +22,7 @@ if success:
     print("Transformation success")
     pcd1.transform(trans)
 
-# Translate right side up, and display right side up
+# Combine point clouds, and display right side up
 pcd = pcd1 + pcd2
 pcd.transform([[1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0, 0, 0, 1]])
 o3d.visualization.draw_geometries([pcd])
