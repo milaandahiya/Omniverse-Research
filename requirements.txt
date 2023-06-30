@@ -2,3 +2,6 @@
 open3d
 numpy
 matplotlib
+
+# Not used in tools but is in the Nvidia example cameraScript.py
+pillow
