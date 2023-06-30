@@ -14,7 +14,7 @@ You may also use the Nvidia Nucleus connector in Omniverse to import/export USDs
 
 You may run `pip install -r requirements.txt` in your venv or whatever environment.
 
-The .vscode directory isn't necessary, but prevents the `import omni` statements from being shown as an error in VSCode. It uses the `app` symlink to link to an Omniverse install (Code, Isaac, etc) to get the omni packages. This is only functionally necessary if you are running Omniverse code outside of the Script Editor, which I am not (yet).
+The .vscode directory isn't necessary, but prevents the `import omni` statements from being shown as an error in VSCode. It uses the `app` symlink to link to an Omniverse install (Code, Isaac, etc) to get the omni packages. This is only functionally necessary if you are running Omniverse code outside of the Script Editor, which I am not (yet). I would recommend changing the symlink to your path, again, to make it easier to use VSCode.
 
 `scripts` contains scripts that you can paste into the Script Editor inside of Omniverse Code (or Isaac Sim). More info in the `scripts` Readme.
 
