@@ -15,7 +15,7 @@ pcd2 = o3d.geometry.PointCloud.create_from_rgbd_image(rgbd2, intrinsic)
 
 # Compute odometry between RGBD images (not strictly necessary for Omniverse cameras with known translations, but
 # probably is necessary for real world cameras)
-option = o3d.pipelines.odometry.OdometryOption() # TODO maybe set options
+option = o3d.pipelines.odometry.OdometryOption(depth_diff_max=0.2)
 success, trans, info = o3d.pipelines.odometry.compute_rgbd_odometry(rgbd1, rgbd2, intrinsic, option=option)
 
 if success:
