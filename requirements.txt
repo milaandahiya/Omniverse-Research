@@ -1,0 +1,4 @@
+# Everything should just work with latest versions of these packages
+open3d
+numpy
+matplotlib

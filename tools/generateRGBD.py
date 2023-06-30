@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 # camera and image are both ints formatted to strings with the proper padding
 # camera is an int representing which camera to use, using 0-based indexing
 # image is an int representing which image to use, using 0-based indexing and always 4 digits (e.g. 0000, 0001, etc.)
+# display is a bool representing whether or not to display the RGB and depth image components
 def generateRGBD(camera: int, image: int, display: bool = False):
     # Get color image
     camera_str = "" if camera == 0 else f"_{camera:{0}{2}}"
