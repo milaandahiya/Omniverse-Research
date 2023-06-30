@@ -1,4 +1,6 @@
-# Getting started with Omniverse
+# SMU-Omniverse
+
+## Getting started with Omniverse
 
 Download Omniverse from here: https://www.nvidia.com/en-us/omniverse/download/. Once you have Omniverse running, go to the exchange tab and install the Code app (The Isaac Sim app also works but has more unnecessary robotics bloat, so I've found it easier to deal with Code.)
 
