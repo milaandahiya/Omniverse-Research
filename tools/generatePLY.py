@@ -26,7 +26,7 @@ pcd2 = o3d.geometry.PointCloud.create_from_rgbd_image(rgbd2, intrinsic)
 # rotate pcd2, attempt multiway registration
 angle = -35 * math.pi / 180
 pcd2.rotate([[math.cos(angle), 0, math.sin(angle)], [0, 1, 0], [-math.sin(angle), 0, math.cos(angle)]])
-pcd2.translate([-0.105, 0, -0.15])
+pcd2.translate([-0.115, 0, -0.153])
 
 # Combine point clouds, and display right side up
 pcd = pcd1 + pcd2
