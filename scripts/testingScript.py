@@ -16,17 +16,24 @@ camera1 = rep.create.camera(position=(-990, 0, 250),
                             f_stop=1.8,
                             clipping_range=(0.1, 2500))
 
-camera2 = rep.create.camera(position=(-990, -490, 250),
-                            rotation=(0, 0, 217),
+camera2 = rep.create.camera(position=(990, 0, 250),
+                            rotation=(0, 0, 0),
                             focal_length=20.0,
                             focus_distance=1000,
                             f_stop=1.8,
                             clipping_range=(0.1, 2500))
+
+# camera2 = rep.create.camera(position=(-990, -490, 250),
+#                             rotation=(0, 0, 217),
+#                             focal_length=20.0,
+#                             focus_distance=1000,
+#                             f_stop=1.8,
+#                             clipping_range=(0.1, 2500))
 print("Created Cameras")
 
-# Render frames at 720p
-render_product1 = rep.create.render_product(camera1, (1280, 720))
-render_product2 = rep.create.render_product(camera2, (1280, 720))
+# Render frames at 480p
+render_product1 = rep.create.render_product(camera1, (848, 480))
+render_product2 = rep.create.render_product(camera2, (848, 480))
 print("Rendered Frames")
 
 # Write to file
