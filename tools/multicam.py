@@ -68,7 +68,7 @@ try:
         if ch==115 and last_ch==-1:
             recording = not recording
             frame_count = 0
-        
+
         if recording:
             # camera 1
             cv2.imwrite(f"camera1/rgb/rgb_{frame_count:{0}{4}}.png", color_image_1, [cv2.IMWRITE_PNG_COMPRESSION, 0])
