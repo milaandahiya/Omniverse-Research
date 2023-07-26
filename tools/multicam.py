@@ -27,7 +27,6 @@ recording = False
 
 try:
     while True:
-
         # Camera 1
         # Wait for a coherent pair of frames: depth and color
         frames_1 = pipeline_1.wait_for_frames()
