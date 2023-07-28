@@ -9,13 +9,15 @@ import matplotlib.pyplot as plt
 # image is an int representing which image to use, using 0-based indexing and always 4 digits (e.g. 0000, 0001, etc.)
 # display is a bool representing whether or not to display the RGB and depth image components
 def generateRGBD(camera: int, image: int, display: bool = False):
+    # source = "/home/gjfh119/Documents/DataOut/RenderProduct_Replicator" # for Omniverse
+    source = "/home/gjfh119/Documents/SMU-Omniverse/camera" # for RealSense
+
     # Get color image
     camera_str = "" if camera == 0 else f"_{camera:{0}{2}}"
-    color_img = o3d.io.read_image(f"/home/gjfh119/Documents/DataOut/RenderProduct_Replicator{camera_str}/rgb/rgb_{image:{0}{4}}.png")
+    color_img = o3d.io.read_image(f"{source}{camera_str}/rgb/rgb_{image:{0}{4}}.png")
 
     # Load numpy array with depth values, scale (doesn't change pointcloud), and convert to depth image
-    depth_array = np.load(f"/home/gjfh119/Documents/DataOut/RenderProduct_Replicator{camera_str}/distance_to_image_plane/distance_to_image_plane_{image:{0}{4}}.npy")
-    depth_array *= 10
+    depth_array = np.load(f"{source}{camera_str}/distance_to_image_plane/distance_to_image_plane_{image:{0}{4}}.npy")
     depth_img = o3d.geometry.Image(depth_array)
 
     #Create RGBD image from color and depth images

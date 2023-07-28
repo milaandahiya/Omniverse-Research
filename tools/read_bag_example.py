@@ -43,8 +43,8 @@ try:
 
     # Configure the pipeline to stream the depth stream
     # Change this parameters according to the recorded bag file resolution
-    config.enable_stream(rs.stream.depth, rs.format.z16, 60)
-    config.enable_stream(rs.stream.color, rs.format.rgb8, 60)
+    config.enable_stream(rs.stream.depth, rs.format.z16, 30)
+    config.enable_stream(rs.stream.color, rs.format.rgb8, 30)
 
     # Start streaming from file
     pipeline.start(config)
