@@ -2,7 +2,7 @@ import pyrealsense2 as rs
 import numpy as np
 import cv2
 import os
-import time
+
 
 # Configure depth and color streams...
 camera1_serial = '151422254323'
