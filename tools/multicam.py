@@ -51,7 +51,7 @@ try:
         depth_image_1 = np.asanyarray(depth_frame_1.get_data())
         color_image_1 = np.asanyarray(color_frame_1.get_data())
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        depth_colormap_1 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_1, alpha=0.5), cv2.COLORMAP_JET)
+        depth_colormap_1 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_1, alpha=0.05), cv2.COLORMAP_JET)
 
         # Camera 2
         # Wait for a coherent pair of frames: depth and color
@@ -64,7 +64,7 @@ try:
         depth_image_2 = np.asanyarray(depth_frame_2.get_data())
         color_image_2 = np.asanyarray(color_frame_2.get_data())
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        depth_colormap_2 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_2, alpha=0.5), cv2.COLORMAP_JET)
+        depth_colormap_2 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_2, alpha=0.05), cv2.COLORMAP_JET)
 
         # Stack images
         camera1_images = np.hstack((color_image_1, depth_colormap_1))
@@ -77,7 +77,7 @@ try:
 
         # starts to save images and depth maps from both cameras by pressing 's', stops by pressing 's' again
         # press esc to quit
-        # press n to create folders for saving images and depth maps
+        # press n to create folders for saving images and depth maps (must do before pressing 's' if folders don't exist)
         ch = cv2.pollKey()
         if ch==27:
             cv2.destroyAllWindows()
@@ -86,8 +86,8 @@ try:
         if ch==110:
             os.makedirs(f"{pwd}/camera/rgb", exist_ok=True)
             os.makedirs(f"{pwd}/camera/distance_to_image_plane", exist_ok=True)
-            os.makedirs(f"{pwd}/camera1/rgb", exist_ok=True)
-            os.makedirs(f"{pwd}/camera1/distance_to_image_plane", exist_ok=True)
+            os.makedirs(f"{pwd}/camera01/rgb", exist_ok=True)
+            os.makedirs(f"{pwd}/camera01/distance_to_image_plane", exist_ok=True)
 
         if ch==115 and last_ch==-1:
             recording = not recording
@@ -98,8 +98,8 @@ try:
             cv2.imwrite(f"{pwd}/camera/rgb/rgb_{frame_count:{0}{4}}.png", color_image_1, [cv2.IMWRITE_PNG_COMPRESSION, 0])
             np.save(f"{pwd}/camera/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_1)
             # camera 2
-            cv2.imwrite(f"{pwd}/camera1/rgb/rgb_{frame_count:{0}{4}}.png", color_image_2, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            np.save(f"{pwd}/camera1/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_2)
+            cv2.imwrite(f"{pwd}/camera01/rgb/rgb_{frame_count:{0}{4}}.png", color_image_2, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            np.save(f"{pwd}/camera01/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_2)
             # update frame count
             print(frame_count)
             frame_count += 1
