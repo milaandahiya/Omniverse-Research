@@ -4,28 +4,32 @@ import cv2
 import os
 
 
-# Configure depth and color streams...
-camera1_serial = '151422254323'
-camera2_serial = '151422253505'
-# ...from Camera 1
-pipeline_1 = rs.pipeline()
-config_1 = rs.config()
-config_1.enable_device(camera1_serial)
-config_1.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
-config_1.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
-# ...from Camera 2
-pipeline_2 = rs.pipeline()
-config_2 = rs.config()
-config_2.enable_device(camera2_serial)
-config_2.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
-config_2.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
+# get all connected camera serials
+context = rs.context()
+num_cameras = len(context.devices)
+camera_serials = []
+for i in range(num_cameras):
+    serial_num = context.devices[i].get_info(rs.camera_info.serial_number)
+    camera_serials.append(serial_num)
 
-# Start streaming from both cameras
-pipeline_1.start(config_1)
-pipeline_2.start(config_2)
+# config streams for each camera (assuming same config for each)
+pipelines = []
+configs = []
+for i in range(num_cameras):
+    pipeline = rs.pipeline()
+    config = rs.config()
+    config.enable_device(camera_serials[i])
+    config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
+    config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
+    pipelines.append(pipeline)
+    configs.append(config)
 
-# get the realsense camera intrinsics
-intrinsics = pipeline_1.get_active_profile().get_stream(rs.stream.depth).as_video_stream_profile().get_intrinsics()
+# start streaming from each camera
+for i in range(num_cameras):
+    pipelines[i].start(configs[i])
+
+# get the first camera intrinsics (assumes others are identical)
+intrinsics = pipelines[0].get_active_profile().get_stream(rs.stream.depth).as_video_stream_profile().get_intrinsics()
 camera_matrix = np.array([[intrinsics.fx, 0, intrinsics.ppx], [0, intrinsics.fy, intrinsics.ppy], [0, 0, 1]])
 
 last_ch = -1
@@ -33,11 +37,12 @@ frame_count = 0
 recording = False
 pwd = os.getcwd()
 
+#NOTE: this loop is currently hard-coded for 2 cameras for speed, but can be easily extended to more cameras
 try:
     while True:
         # Camera 1
         # Wait for a coherent pair of frames: depth and color
-        frames_1 = pipeline_1.wait_for_frames()
+        frames_1 = pipelines[0].wait_for_frames()
         depth_frame_1 = frames_1.get_depth_frame()
         color_frame_1 = frames_1.get_color_frame()
         if not depth_frame_1 or not color_frame_1:
@@ -50,7 +55,7 @@ try:
 
         # Camera 2
         # Wait for a coherent pair of frames: depth and color
-        frames_2 = pipeline_2.wait_for_frames()
+        frames_2 = pipelines[1].wait_for_frames()
         depth_frame_2 = frames_2.get_depth_frame()
         color_frame_2 = frames_2.get_color_frame()
         if not depth_frame_2 or not color_frame_2:
@@ -71,6 +76,8 @@ try:
         cv2.imshow('RealSense', images)
 
         # starts to save images and depth maps from both cameras by pressing 's', stops by pressing 's' again
+        # press esc to quit
+        # press n to create folders for saving images and depth maps
         ch = cv2.pollKey()
         if ch==27:
             cv2.destroyAllWindows()
@@ -99,5 +106,5 @@ try:
         last_ch = ch
 
 finally:
-    pipeline_1.stop()
-    pipeline_2.stop()
+    for i in range(num_cameras):
+        pipelines[i].stop()
