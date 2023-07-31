@@ -35,6 +35,7 @@ camera_matrix = np.array([[intrinsics.fx, 0, intrinsics.ppx], [0, intrinsics.fy,
 last_ch = -1
 frame_count = 0
 recording = False
+sized = False
 pwd = os.getcwd()
 
 #NOTE: this loop is currently hard-coded for 2 cameras for speed, but can be easily extended to more cameras
@@ -74,6 +75,9 @@ try:
         # Show images from both cameras
         cv2.namedWindow('RealSense', cv2.WINDOW_NORMAL)
         cv2.imshow('RealSense', images)
+        if not sized:
+            cv2.resizeWindow('RealSense', 1280, 720)
+            sized = True
 
         # starts to save images and depth maps from both cameras by pressing 's', stops by pressing 's' again
         # press esc to quit
