@@ -90,8 +90,8 @@ try:
         if ch==110:
             os.makedirs(f"{pwd}/camera/rgb", exist_ok=True)
             os.makedirs(f"{pwd}/camera/distance_to_image_plane", exist_ok=True)
-            os.makedirs(f"{pwd}/camera01/rgb", exist_ok=True)
-            os.makedirs(f"{pwd}/camera01/distance_to_image_plane", exist_ok=True)
+            os.makedirs(f"{pwd}/camera_01/rgb", exist_ok=True)
+            os.makedirs(f"{pwd}/camera_01/distance_to_image_plane", exist_ok=True)
 
         if ch==115 and last_ch==-1:
             recording = not recording
@@ -102,8 +102,8 @@ try:
             cv2.imwrite(f"{pwd}/camera/rgb/rgb_{frame_count:{0}{4}}.png", color_image_1, [cv2.IMWRITE_PNG_COMPRESSION, 0])
             np.save(f"{pwd}/camera/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_1)
             # camera 2
-            cv2.imwrite(f"{pwd}/camera01/rgb/rgb_{frame_count:{0}{4}}.png", color_image_2, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            np.save(f"{pwd}/camera01/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_2)
+            cv2.imwrite(f"{pwd}/camera_01/rgb/rgb_{frame_count:{0}{4}}.png", color_image_2, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            np.save(f"{pwd}/camera_01/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_2)
             # update frame count
             print(frame_count)
             frame_count += 1
