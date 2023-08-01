@@ -1,6 +1,7 @@
 import open3d as o3d
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 # Returns one RGBD image generated from Omniverse data
 # The root path, "/home/gjfh119/Documents/DataOut/", is hardcoded, so it will be necessary to change
@@ -32,3 +33,6 @@ def generateRGBD(camera: int, image: int, display: bool = False):
         plt.show()
 
     return rgbd_img
+
+def main():
+    generateRGBD(sys.argv[1], sys.argv[2], True)
