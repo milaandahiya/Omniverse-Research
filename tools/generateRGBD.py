@@ -34,6 +34,7 @@ def generateRGBD(camera: int, image: int, display: bool = True):
 
     return rgbd_img
 
+
 def main():
     print("this should not print")
     generateRGBD(int(sys.argv[1]), int(sys.argv[2]), True)

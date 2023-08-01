@@ -39,6 +39,7 @@ def generatePLY(numCameras: int, image: int, displayRGBD: bool = False, displayP
         o3d.visualization.draw_geometries([pcd])
     return pcd
 
+
 def main():
     print(sys.argv[1])
     generatePLY(int(sys.argv[1]), int(sys.argv[2]), False, True)
