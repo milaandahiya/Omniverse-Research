@@ -40,4 +40,8 @@ def generatePLY(numCameras: int, image: int, displayRGBD: bool = False, displayP
     return pcd
 
 def main():
-    generatePLY(sys.argv[1], sys.argv[2], False, True)
+    print(sys.argv[1])
+    generatePLY(int(sys.argv[1]), int(sys.argv[2]), False, True)
+
+if __name__ == "__main__":
+    main()
