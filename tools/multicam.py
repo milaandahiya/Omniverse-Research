@@ -32,13 +32,14 @@ for i in range(num_cameras):
 intrinsics = pipelines[0].get_active_profile().get_stream(rs.stream.depth).as_video_stream_profile().get_intrinsics()
 camera_matrix = np.array([[intrinsics.fx, 0, intrinsics.ppx], [0, intrinsics.fy, intrinsics.ppy], [0, 0, 1]])
 
+# vars
 last_ch = -1
 frame_count = 0
 recording = False
 sized = False
 pwd = os.getcwd()
 
-#NOTE: this loop is currently hard-coded for 2 cameras for speed, but can be easily extended to more cameras
+# NOTE: this loop is currently hard-coded for 2 cameras for speed, but can be easily extended to more cameras
 try:
     while True:
         # Camera 1
@@ -79,7 +80,8 @@ try:
             cv2.resizeWindow('RealSense', 1280, 720)
             sized = True
 
-        # starts to save images and depth maps from both cameras by pressing 's', stops by pressing 's' again
+        # starts to save "record" images and depth maps from both cameras by pressing 's', stops by pressing 's' again
+        # prints index of frame being saved
         # press esc to quit
         # press n to create folders for saving images and depth maps (must do before pressing 's' if folders don't exist)
         ch = cv2.pollKey()
