@@ -5,7 +5,7 @@ import math
 import sys
 
 
-def generatePLY(numCameras: int, image: int, displayRGBD: bool = False, displayPLY: bool = True):
+def generatePCD(numCameras: int, image: int, displayRGBD: bool = False, displayPLY: bool = True):
     # Get the RGBD image generated from Omniverse/Realsense data
     rgbd_images = []
     for i in range(numCameras):
@@ -41,7 +41,7 @@ def generatePLY(numCameras: int, image: int, displayRGBD: bool = False, displayP
 
 
 def main():
-    generatePLY(int(sys.argv[1]), int(sys.argv[2]), False, True)
+    generatePCD(int(sys.argv[1]), int(sys.argv[2]), False, True)
 
 if __name__ == "__main__":
     main()
