@@ -41,7 +41,7 @@ def generatePCD(numCameras: int, image: int, display: bool = True):
 
 
 def main():
-    generatePCD(int(sys.argv[1]), int(sys.argv[2]), False, True)
+    generatePCD(int(sys.argv[1]), int(sys.argv[2]), True)
 
 if __name__ == "__main__":
     main()
