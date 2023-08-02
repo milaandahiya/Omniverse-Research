@@ -5,11 +5,11 @@ import math
 import sys
 
 
-def generatePCD(numCameras: int, image: int, displayRGBD: bool = False, displayPLY: bool = True):
+def generatePCD(numCameras: int, image: int, display: bool = True):
     # Get the RGBD image generated from Omniverse/Realsense data
     rgbd_images = []
     for i in range(numCameras):
-        rgbd_images.append(generateRGBD(1, image, displayRGBD))
+        rgbd_images.append(generateRGBD(i, image, False))
 
     # Set camera intrinsic values
     # intrinsics = o3d.camera.PinholeCameraIntrinsic(848, 480, 809, 627, 424, 240) # fx, fy = 1221, 641 for 720p Omniverse
@@ -35,7 +35,7 @@ def generatePCD(numCameras: int, image: int, displayRGBD: bool = False, displayP
     for i in range(numCameras):
         pcd += pcds[i]
     pcd.transform([[1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0, 0, 0, 1]])
-    if displayPLY:
+    if display:
         o3d.visualization.draw_geometries([pcd])
     return pcd
 
