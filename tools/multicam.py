@@ -13,14 +13,15 @@ for i in range(num_cameras):
     camera_serials.append(serial_num)
 
 # config streams for each camera (assuming same config for each)
+framerate = 60
 pipelines = []
 configs = []
 for i in range(num_cameras):
     pipeline = rs.pipeline()
     config = rs.config()
     config.enable_device(camera_serials[i])
-    config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
-    config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
+    config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, framerate)
+    config.enable_stream(rs.stream.color, 848, 480, rs.format.bgr8, framerate)
     pipelines.append(pipeline)
     configs.append(config)
 
@@ -28,9 +29,10 @@ for i in range(num_cameras):
 for i in range(num_cameras):
     pipelines[i].start(configs[i])
 
-# get the first camera intrinsics (assumes others are identical)
-intrinsics = pipelines[0].get_active_profile().get_stream(rs.stream.depth).as_video_stream_profile().get_intrinsics()
-camera_matrix = np.array([[intrinsics.fx, 0, intrinsics.ppx], [0, intrinsics.fy, intrinsics.ppy], [0, 0, 1]])
+# get the first camera's intrinsics
+# intrinsics = pipelines[0].get_active_profile().get_stream(rs.stream.depth).as_video_stream_profile().get_intrinsics()
+# camera_matrix = np.array([[intrinsics.fx, 0, intrinsics.ppx], [0, intrinsics.fy, intrinsics.ppy], [0, 0, 1]])
+# print(camera_matrix)
 
 # vars
 last_ch = -1
@@ -38,8 +40,16 @@ frame_count = 0
 recording = False
 sized = False
 pwd = os.getcwd()
+dec_filter = rs.decimation_filter ()   # Decimation - reduces depth frame density
+spat_filter = rs.spatial_filter()          # Spatial    - edge-preserving spatial smoothing
+temp_filter = rs.temporal_filter()       # Temporal   - reduces temporal noise
+colorizer = rs.colorizer(0) # 0 = jet colormap
+colorizer.set_option(rs.option.visual_preset, 1) # 0=Dynamic, 1=Fixed, 2=Near, 3=Far
+colorizer.set_option(rs.option.min_distance, 0.1) # min distance in meters
+colorizer.set_option(rs.option.max_distance, 4) # max distance in meters
 
-# NOTE: this loop is currently hard-coded for 2 cameras for speed, but can be easily extended to more cameras
+
+# NOTE: this loop is currently hard-coded for 2 cameras, but can be easily extended to more cameras
 try:
     while True:
         # Camera 1
@@ -49,11 +59,15 @@ try:
         color_frame_1 = frames_1.get_color_frame()
         if not depth_frame_1 or not color_frame_1:
             continue
+        # depth_frame_1 = dec_filter.process(depth_frame_1)
+        # depth_frame_1 = spat_filter.process(depth_frame_1)
+        # depth_frame_1 = temp_filter.process(depth_frame_1)
+
         # Convert images to numpy arrays
-        depth_image_1 = np.asanyarray(depth_frame_1.get_data())
+        depth_image_1 = np.asanyarray(colorizer.colorize(depth_frame_1).get_data())
         color_image_1 = np.asanyarray(color_frame_1.get_data())
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        depth_colormap_1 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_1, alpha=0.05), cv2.COLORMAP_JET)
+        # depth_colormap_1 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_1, alpha=0.05), cv2.COLORMAP_JET)
 
         # Camera 2
         # Wait for a coherent pair of frames: depth and color
@@ -62,15 +76,19 @@ try:
         color_frame_2 = frames_2.get_color_frame()
         if not depth_frame_2 or not color_frame_2:
             continue
+        # depth_frame_2 = dec_filter.process(depth_frame_2)
+        # depth_frame_2 = spat_filter.process(depth_frame_2)
+        # depth_frame_2 = temp_filter.process(depth_frame_2)
+
         # Convert images to numpy arrays
-        depth_image_2 = np.asanyarray(depth_frame_2.get_data())
+        depth_image_2 = np.asanyarray(colorizer.colorize(depth_frame_2).get_data())
         color_image_2 = np.asanyarray(color_frame_2.get_data())
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        depth_colormap_2 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_2, alpha=0.05), cv2.COLORMAP_JET)
+        # depth_colormap_2 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_2, alpha=0.05), cv2.COLORMAP_JET)
 
         # Stack images
-        camera1_images = np.hstack((color_image_1, depth_colormap_1))
-        camera2_images = np.hstack((color_image_2, depth_colormap_2))
+        camera1_images = np.hstack((color_image_1, depth_image_1))
+        camera2_images = np.hstack((color_image_2, depth_image_2))
         images = np.vstack((camera1_images, camera2_images))
 
         # Show images from both cameras
@@ -80,10 +98,11 @@ try:
             cv2.resizeWindow('RealSense', 1280, 720)
             sized = True
 
+        # NOTE:
         # starts to save "record" images and depth maps from both cameras by pressing 's', stops by pressing 's' again
         # prints index of frame being saved
-        # press esc to quit
         # press n to create folders for saving images and depth maps (must do before pressing 's' if folders don't exist)
+        # press esc to quit
         ch = cv2.pollKey()
         if ch==27:
             cv2.destroyAllWindows()
@@ -102,10 +121,10 @@ try:
         if recording:
             # camera 1
             cv2.imwrite(f"{pwd}/camera/rgb/rgb_{frame_count:{0}{4}}.png", color_image_1, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            np.save(f"{pwd}/camera/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_1)
+            np.save(f"{pwd}/camera/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_image_1)
             # camera 2
             cv2.imwrite(f"{pwd}/camera_01/rgb/rgb_{frame_count:{0}{4}}.png", color_image_2, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            np.save(f"{pwd}/camera_01/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_colormap_2)
+            np.save(f"{pwd}/camera_01/distance_to_image_plane/distance_to_image_plane_{frame_count:{0}{4}}.npy", depth_image_2)
             # update frame count
             print(frame_count)
             frame_count += 1
