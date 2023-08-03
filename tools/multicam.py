@@ -5,7 +5,7 @@ import os
 
 
 # NOTE set values
-resolution = (848, 480)
+resolution = [848, 480]
 framerate = 60
 min_distance = 0.1
 max_distance = 4
@@ -26,8 +26,8 @@ for i in range(num_cameras):
     pipeline = rs.pipeline()
     config = rs.config()
     config.enable_device(camera_serials[i])
-    config.enable_stream(rs.stream.depth, resolution, rs.format.z16, framerate)
-    config.enable_stream(rs.stream.color, resolution, rs.format.bgr8, framerate)
+    config.enable_stream(rs.stream.depth, resolution[0], resolution[1], rs.format.z16, framerate)
+    config.enable_stream(rs.stream.color, resolution[0], resolution[1], rs.format.bgr8, framerate)
     pipelines.append(pipeline)
     configs.append(config)
 
