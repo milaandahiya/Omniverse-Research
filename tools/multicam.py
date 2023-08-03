@@ -4,6 +4,13 @@ import cv2
 import os
 
 
+# NOTE set values
+resolution = (848, 480)
+framerate = 60
+min_distance = 0.1
+max_distance = 4
+
+
 # get all connected camera serials
 context = rs.context()
 num_cameras = len(context.devices)
@@ -13,15 +20,14 @@ for i in range(num_cameras):
     camera_serials.append(serial_num)
 
 # config streams for each camera (assuming same config for each)
-framerate = 60
 pipelines = []
 configs = []
 for i in range(num_cameras):
     pipeline = rs.pipeline()
     config = rs.config()
     config.enable_device(camera_serials[i])
-    config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, framerate)
-    config.enable_stream(rs.stream.color, 848, 480, rs.format.bgr8, framerate)
+    config.enable_stream(rs.stream.depth, resolution, rs.format.z16, framerate)
+    config.enable_stream(rs.stream.color, resolution, rs.format.bgr8, framerate)
     pipelines.append(pipeline)
     configs.append(config)
 
@@ -45,8 +51,8 @@ spat_filter = rs.spatial_filter()          # Spatial    - edge-preserving spatia
 temp_filter = rs.temporal_filter()       # Temporal   - reduces temporal noise
 colorizer = rs.colorizer(0) # 0 = jet colormap
 colorizer.set_option(rs.option.visual_preset, 1) # 0=Dynamic, 1=Fixed, 2=Near, 3=Far
-colorizer.set_option(rs.option.min_distance, 0.1) # min distance in meters
-colorizer.set_option(rs.option.max_distance, 4) # max distance in meters
+colorizer.set_option(rs.option.min_distance, min_distance) # min distance in meters
+colorizer.set_option(rs.option.max_distance, max_distance) # max distance in meters
 
 
 # NOTE: this loop is currently hard-coded for 2 cameras, but can be easily extended to more cameras
