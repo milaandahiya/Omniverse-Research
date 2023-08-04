@@ -22,13 +22,6 @@ camera2 = rep.create.camera(position=(990, 0, 250),
                             focus_distance=1000,
                             f_stop=1.8,
                             clipping_range=(0.1, 2500))
-
-# camera2 = rep.create.camera(position=(-990, -490, 250),
-#                             rotation=(0, 0, 217),
-#                             focal_length=20.0,
-#                             focus_distance=1000,
-#                             f_stop=1.8,
-#                             clipping_range=(0.1, 2500))
 print("Created Cameras")
 
 # Render frames at 480p
@@ -38,9 +31,8 @@ print("Rendered Frames")
 
 # Write to file
 writer = rep.WriterRegistry.get("BasicWriter")
-writer.initialize(output_dir="/home/gjfh119/Documents/DataOut/", rgb=True, distance_to_image_plane=True)#, camera_params=True)
+writer.initialize(output_dir="/home/gjfh119/Documents/OmniverseData/", rgb=True, distance_to_image_plane=True)#, camera_params=True)
 writer.attach([render_product1, render_product2])
 print("Wrote to file")
 
-# Preview?
 rep.orchestrator.run()

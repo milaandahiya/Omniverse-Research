@@ -5,3 +5,5 @@
 `testingScript.py` uses an Omni [Replicator object](https://docs.omniverse.nvidia.com/prod_extensions/prod_extensions/ext_replicator.html) to create the cameras in the open stage (or open stage from file) and then use a [Basic Writer](https://docs.omniverse.nvidia.com/prod_extensions/prod_extensions/ext_replicator/programmatic_visualization.html) to write the RGB and depth data to a folder. There you can set an arbitrary number of cameras and their intrinsics.
 
 To use `testingScript.py`, I currently load my stage in Omniverse Code, paste the code into the script editor, run the simulation, and the run the code in the script editor *after* starting the simulation. This starts the simulation from the top, however due to a lack of disk speed, memory, or both(?), it is inconsistent in how many frames it gathers before freezing or slowing down considerably. I am trying to figure out a way to slowly step the Ominverse simulation each time data is written, as opposed to the current method.
+
+todo show how to add custom script shortcut also save and load layout

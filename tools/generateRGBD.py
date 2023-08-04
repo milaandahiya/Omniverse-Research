@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import sys
 
 # Returns one RGBD image generated from Omniverse data
-# The root path, "/home/gjfh119/Documents/DataOut/", is hardcoded, so it will be necessary to change
 # camera and image are both ints formatted to strings with the proper padding
 # camera is an int representing which camera to use, using 0-based indexing
 # image is an int representing which image to use, using 0-based indexing and always 4 digits (e.g. 0000, 0001, etc.)
@@ -12,13 +11,13 @@ import sys
 def generateRGBD(camera: int, image: int, source: str, display: bool = False):
     path = ""
     if source.startswith("omniverse"):
-        path = "/home/gjfh119/Documents/DataOut/RenderProduct_Replicator"
+        path = "/home/gjfh119/Documents/OmniverseData/RenderProduct_Replicator"
     elif source.startswith("realsense"):
         path = "/home/gjfh119/Documents/SMU-Omniverse/camera"
     else:
         print("Invalid source")
         return
-
+ 
     # Get color image
     camera_str = "" if camera == 0 else f"_{camera:{0}{2}}"
     color_img = o3d.io.read_image(f"{path}{camera_str}/rgb/rgb_{image:{0}{4}}.png")

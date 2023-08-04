@@ -31,10 +31,16 @@ def generatePCD(camera: int, image: int, source: str):
 
 def combinePCD(pcds: list):
     # do whatever translations necessary to align the point clouds (ex. ICP)
+
     # this is a specific rotation/translation for omniverse
-    angle = math.pi
+    # angle = math.pi
+    # pcds[1].rotate([[math.cos(angle), 0, math.sin(angle)], [0, 1, 0], [-math.sin(angle), 0, math.cos(angle)]])
+    # pcds[1].translate([0, 0, 0.0089])
+    
+    # specific (not accurate) translation for realsense config
+    angle = 48 * math.pi / 180
+    pcds[1].translate([-0.00020, 0, 0.00015])
     pcds[1].rotate([[math.cos(angle), 0, math.sin(angle)], [0, 1, 0], [-math.sin(angle), 0, math.cos(angle)]])
-    pcds[1].translate([0, 0, 0.0089])
 
     # combine point clouds
     pcd = o3d.geometry.PointCloud()
