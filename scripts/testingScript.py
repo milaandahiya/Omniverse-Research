@@ -8,7 +8,7 @@ stage = context.get_stage() # Get the current stage in Omniverse
 # context.open_stage('/home/gjfh119/Documents/USD Files/alien.usd') # Open saved dancing alien stage
 print("Retrieved Stage")
 
-# Create cameras (corners of room are -10 to 10 on the x and -5 to 5 on the y/z -- camera units are 10x world units)
+# Create cameras (corners of alien stage are -10 to 10 on the x and -5 to 5 on the y/z -- camera units are 1/10th of world units)
 camera1 = rep.create.camera(position=(-990, 0, 250),
                             rotation=(0, 0, 180),
                             focal_length=20.0,

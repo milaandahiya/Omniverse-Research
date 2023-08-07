@@ -10,7 +10,6 @@ def generatePCD(camera: int, image: int, source: str):
     rgbd_image = generateRGBD(camera, image, source)
 
     # check preset intrinsics values
-    # NOTE intrinsic parameter may be a string or an o3d.camera.PinholeCameraIntrinsic object
     if source == "omniverse480p":
         intrinsics = o3d.camera.PinholeCameraIntrinsic(848, 480, 809, 627, 424, 240)
     elif source == "omniverse720p":

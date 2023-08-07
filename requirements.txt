@@ -1,4 +1,3 @@
-# Everything should just work with latest versions of these packages
 open3d
 cv2
 numpy

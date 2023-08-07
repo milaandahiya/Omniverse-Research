@@ -6,7 +6,7 @@ from generatePCD import combinePCD
 
 frames = 70         # make sure you have this many frames in the data directory
 source = "realsense480p"       # picks the right intrinsics in generatePCD and tells generateRGBD which directory to use
-combined = True        # use two cameras and combine them
+combined = False        # use two cameras and combine them
 singleCamera = 0        # when combined = False, this is the camera to use, ex. 0 or 1
 
 vis = o3d.visualization.VisualizerWithKeyCallback()
