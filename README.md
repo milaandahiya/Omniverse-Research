@@ -10,7 +10,7 @@ For example, if you want to import an asset from Blender, Nvidia built a branch 
 
 ## Notes
 
-You may run `pip install -r requirements.txt` in your environment to run some of the programs in `tools`.
+You may run `pip install -r requirements.txt` in your environment.
 
 The .vscode directory isn't necessary, but prevents the `import omni` statements from being shown as an error in VSCode. It uses the `app` symlink to link to an Omniverse install (Code, Isaac, etc) to get the omni packages. This is only functionally necessary if you are running Omniverse code outside of the Script Editor, which I am not (yet). I would recommend changing the symlink to your path, again, to make it easier to use VSCode.
 
