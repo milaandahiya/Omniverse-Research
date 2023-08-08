@@ -12,9 +12,9 @@ def generateRGBD(camera: int, image: int, source: str, display: bool = False):
     # NOTE path is hardcoded
     path = ""
     if source.startswith("omniverse"):
-        path = "/home/gjfh119/Documents/OmniverseData/RenderProduct_Replicator"
+        path = "/home/gjfh119/Documents/example_data/omniverse/RenderProduct_Replicator"
     elif source.startswith("realsense"):
-        path = "/home/gjfh119/Documents/SMU-Omniverse/camera"
+        path = "/home/gjfh119/Documents/example_data/realsense_1/camera"
     else:
         print("Invalid source")
         return
