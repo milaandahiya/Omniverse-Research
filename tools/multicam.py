@@ -46,6 +46,7 @@ frame_count = 0
 recording = False
 sized = False
 pwd = os.getcwd()
+# NOTE The spatial and temporal filters reduce framerate, and I haven't gotten the decimation filter to work
 # dec_filter = rs.decimation_filter ()   # Decimation - reduces depth frame density
 # spat_filter = rs.spatial_filter()          # Spatial    - edge-preserving spatial smoothing
 # temp_filter = rs.temporal_filter()       # Temporal   - reduces temporal noise
