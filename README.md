@@ -2,7 +2,7 @@
 
 ## Getting started with Omniverse
 
-Download Omniverse from here: https://www.nvidia.com/en-us/omniverse/download/. Once you have Omniverse running, go to the exchange tab and install the Code app (the Isaac Sim app also contains the Script Editor but has more robotics features, so I've found it easier to deal with Code).
+Download Omniverse from here: https://www.nvidia.com/en-us/omniverse/download/. Once you have the Omniverse launcher running, go to the exchange tab and install the Code app (the Isaac Sim app also contains the Script Editor but has more robotics-related features, so I've found it easier to deal with Code).
 
 Pixar's Universal Scene Description (USD) is the primary scene descriptor used by Nvidia Omniverse. Any programs that can export in USD should be able to import into Omniverse. The dancing alien stage I use is provided as `alien.usd`.
 
@@ -10,10 +10,10 @@ For example, if you want to import an asset from Blender, Nvidia built a branch 
 
 ## Notes
 
-You may run `pip install -r requirements.txt` in your venv or whatever environment.
+You may run `pip install -r requirements.txt` in your environment to run some of the programs in `tools`.
 
 The .vscode directory isn't necessary, but prevents the `import omni` statements from being shown as an error in VSCode. It uses the `app` symlink to link to an Omniverse install (Code, Isaac, etc) to get the omni packages. This is only functionally necessary if you are running Omniverse code outside of the Script Editor, which I am not (yet). I would recommend changing the symlink to your path, again, to make it easier to use VSCode.
 
-`scripts` contains scripts that you can use in the Script Editor inside of Omniverse Code (or Isaac Sim). More info in the `scripts` Readme.
+The `scripts` directory contains scripts that you can use in the Script Editor inside of Omniverse Code (or Isaac Sim). More info in the `scripts` Readme.
 
-`tools` contains standalone Python scripts for creating a RGBD images, and subsequently point clouds, from the sensor data generated. More info in the `tools` Readme.
+The `tools` directory contains standalone Python scripts for creating a RGBD images, and subsequently point clouds, from the sensor data generated. More info in the `tools` Readme.
