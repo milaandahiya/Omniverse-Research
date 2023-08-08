@@ -12,4 +12,4 @@
 
 `read_bag_example.py` will display the color and depth feeds from a RealSense recording .bag file
 
-`multicam.py` will record color .png and depth .npy files from multiple RealSense cameras. It uses the same file and directory naming and structure as Omniverse's basic writer, but this is customizable.
+`multicam.py` will record color .png and depth .npy files from multiple RealSense cameras. It uses the same file and directory naming and structure as Omniverse's basic writer, but this is customizable. While viewing the camera feeds and setting the proper values, you can press 's' to start/stop recording. It also requires the camera output directories to be present in your current working directory, and you can press 'n' to create them. 'Esc' closes the viewer. It also contains code to output the intrinsic matrices of the connected cameras.
