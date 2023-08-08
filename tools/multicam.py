@@ -46,9 +46,9 @@ frame_count = 0
 recording = False
 sized = False
 pwd = os.getcwd()
-dec_filter = rs.decimation_filter ()   # Decimation - reduces depth frame density
-spat_filter = rs.spatial_filter()          # Spatial    - edge-preserving spatial smoothing
-temp_filter = rs.temporal_filter()       # Temporal   - reduces temporal noise
+# dec_filter = rs.decimation_filter ()   # Decimation - reduces depth frame density
+# spat_filter = rs.spatial_filter()          # Spatial    - edge-preserving spatial smoothing
+# temp_filter = rs.temporal_filter()       # Temporal   - reduces temporal noise
 colorizer = rs.colorizer(0) # 0 = jet colormap
 colorizer.set_option(rs.option.visual_preset, 1) # 0=Dynamic, 1=Fixed, 2=Near, 3=Far
 colorizer.set_option(rs.option.min_distance, min_distance) # min distance in meters
@@ -72,8 +72,6 @@ try:
         # Convert images to numpy arrays
         depth_image_1 = np.asanyarray(colorizer.colorize(depth_frame_1).get_data())
         color_image_1 = np.asanyarray(color_frame_1.get_data())
-        # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        # depth_colormap_1 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_1, alpha=0.05), cv2.COLORMAP_JET)
 
         # Camera 2
         # Wait for a coherent pair of frames: depth and color
@@ -89,8 +87,6 @@ try:
         # Convert images to numpy arrays
         depth_image_2 = np.asanyarray(colorizer.colorize(depth_frame_2).get_data())
         color_image_2 = np.asanyarray(color_frame_2.get_data())
-        # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        # depth_colormap_2 = cv2.applyColorMap(cv2.convertScaleAbs(depth_image_2, alpha=0.05), cv2.COLORMAP_JET)
 
         # Stack images
         camera1_images = np.hstack((color_image_1, depth_image_1))

@@ -9,6 +9,7 @@ import sys
 # image is an int representing which image to use, using 0-based indexing and always 4 digits (e.g. 0000, 0001, etc.)
 # display is a bool representing whether or not to display the RGB and depth image components
 def generateRGBD(camera: int, image: int, source: str, display: bool = False):
+    # NOTE path is hardcoded
     path = ""
     if source.startswith("omniverse"):
         path = "/home/gjfh119/Documents/OmniverseData/RenderProduct_Replicator"
