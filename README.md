@@ -18,4 +18,4 @@ The `scripts` directory contains scripts that you can use in the Script Editor i
 
 The `tools` directory contains standalone Python scripts for creating a RGBD images, and subsequently point clouds, from the sensor data generated. More info in the `tools` Readme.
 
-The recommended driver versions / hardware for Omniverse can be found [here](https://docs.omniverse.nvidia.com/platform/latest/common/technical-requirements.html).
+The recommended driver versions / hardware for Omniverse can be found [here](https://docs.omniverse.nvidia.com/platform/latest/common/technical-requirements.html). I recommend you install the recommended nvidia driver version on Ubuntu via the "Software & Updates" - "Additional Drivers" settings, by selecting the matching major version (currently 525 on Linux).

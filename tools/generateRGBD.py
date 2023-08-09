@@ -18,7 +18,7 @@ def generateRGBD(camera: int, image: int, source: str, display: bool = False):
     else:
         print("Invalid source")
         return
- 
+
     # Get color image
     camera_str = "" if camera == 0 else f"_{camera:{0}{2}}"
     color_img = o3d.io.read_image(f"{path}{camera_str}/rgb/rgb_{image:{0}{4}}.png")
