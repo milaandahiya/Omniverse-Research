@@ -10,9 +10,11 @@ For example, if you want to import an asset from Blender, Nvidia built a branch 
 
 Once you have a stage built (or using the example stage), you may open it in Omniverse Code (or any other Omniverse application) by going to "File" and then "Open", and selecting your USD file. Then you can follow the instructions in the [scripts readme](scripts/README.md) to generate data in Omniverse.
 
-After you have generated data in Omniverse (or used some of the example data provided), you can use any of the Python scripts in [tools](tools) to turn it into RGBD images, point clouds, and visualize them. You can use the same process using the tools after generating RealSense data.
+After you have generated data in Omniverse (or used some of the example data provided), you can follow the instructions in the [tools readme](tools/README.md) to turn it into RGBD images, point clouds, and visualize them. You can use the same process using the tools after generating RealSense data.
 
 ## Notes
+
+[Example Data]() - Here is a zip file containing a set 480p resolution data from Omniverse and 2 sets of 480p resolution data from the Realsense cameras. In some camera angles of the RealSense data, you can see the reflections of the floor/glass/TV cause weird noisy issues. The RealSense cameras really don't like reflections. Translation code for the Omniverse dataset and one of the RealSense datasets is available in **combinePCD** inside of [generatePCD.py](tools/generatePCD.py).
 
 You may run `pip install -r requirements.txt` in your environment.
 
