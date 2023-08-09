@@ -8,13 +8,13 @@ Pixar's Universal Scene Description (USD) is the primary scene descriptor used b
 
 For example, if you want to import an asset from Blender, Nvidia built a branch of Blender v4.0 (currently in alpha) with improved USD exporting functionality. You can download it at [here](https://builder.blender.org/download/experimental/universal-scene-description/) and select the version for your operating system. [This guide](https://docs.omniverse.nvidia.com/con_connect/con_connect/blender.html) from Nvidia shows you the process for exporting a USD file from Blender (v3.6 but still applicable) and importing it to Omniverse. The documentation from Blender for exporting USD files is [here](https://docs.blender.org/manual/en/4.0/files/import_export/usd.html).
 
-Once you have a stage built (or using the example stage), you may open it in Omniverse Code (or any other Omniverse application) by going to "File" and then "Open", and selecting your USD file. Then you can follow the instructions in the [scripts readme](scripts/README.md) to generate data in Omniverse.
+Once you have a stage built (or using the example stage), you may open it in Omniverse Code (or any other Omniverse application) by going to "File" and then "Open", and selecting your USD file. Then you can follow the instructions in the [scripts readme](scripts) to generate data in Omniverse.
 
-After you have generated data in Omniverse (or used some of the example data provided), you can follow the instructions in the [tools readme](tools/README.md) to turn it into RGBD images, point clouds, and visualize them. You can use the same process using the tools after generating RealSense data.
+After you have generated data in Omniverse (or used some of the example data provided), you can follow the instructions in the [tools readme](tools) to turn it into RGBD images, point clouds, and visualize them. You can use the same process using the tools after generating RealSense data.
 
 ## Notes
 
-[Example Data]() - Here is a zip file containing a set 480p resolution data from Omniverse and 2 sets of 480p resolution data from the Realsense cameras. In some camera angles of the RealSense data, you can see the reflections of the floor/glass/TV cause weird noisy issues. The RealSense cameras really don't like reflections. Translation code for the Omniverse dataset and one of the RealSense datasets is available in **combinePCD** inside of [generatePCD.py](tools/generatePCD.py).
+[Example Data](https://smu.box.com/s/ghw9lony6uy6oc0yk8jtmpbrs5277zoi) - Here is a zip file containing a set 480p resolution data from Omniverse and 2 sets of 480p resolution data from the Realsense cameras. In some camera angles of the RealSense data, you can see the reflections of the floor/glass/TV cause weird noisy issues. The RealSense cameras really don't like reflections. Translation code for the Omniverse dataset and one of the RealSense datasets is available in **combinePCD** inside of [generatePCD.py](tools/generatePCD.py).
 
 You may run `pip install -r requirements.txt` in your environment.
 
