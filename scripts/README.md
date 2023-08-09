@@ -2,7 +2,7 @@
 
 `cameraScript.py` is an example script from Nvidia Omniverse documentation that helped to create `testingScript.py`. It is designed to run standalone/headless. There are more camera script examples [here](https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator/camera_examples.html).
 
-`testingScript.py` is run inside of the Script Editor (not standalone/headless) inside of Omniverse Code ([More details here](https://docs.omniverse.nvidia.com/app_code/prod_extensions/ext_script-editor.html)). I have not gotten the shortcut to personal snippets to work in Code, only Isaac. This is a bug but it's not a huge deal, you just have to manually copy and paste the script into the Script Editor.
+`testingScript.py` is run inside of the Script Editor (not standalone/headless) inside of Omniverse Code ([More details here](https://docs.omniverse.nvidia.com/app_code/prod_extensions/ext_script-editor.html)). I have not gotten the shortcut to personal snippets to work in Code, only Isaac. This is a bug, but it's not a huge deal, you just have to manually copy and paste the script into the Script Editor.
 
 `testingScript.py` uses an [Omni Replicator object](https://docs.omniverse.nvidia.com/prod_extensions/prod_extensions/ext_replicator.html) to create the cameras in the open stage (or open stage from file) and then uses a [Basic Writer](https://docs.omniverse.nvidia.com/prod_extensions/prod_extensions/ext_replicator/programmatic_visualization.html) to write the RGB data (png files) and depth data (npy files). There you can set an arbitrary number of cameras and their intrinsics.
 
