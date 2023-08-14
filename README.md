@@ -1,4 +1,4 @@
-# SMU-Omniverse
+# Omniverse-Research
 
 ## Getting started with Omniverse
 
